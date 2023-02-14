@@ -1,3 +1,9 @@
+.menu ::ng-deep button {
+  margin-right: .25em;
+}
+a{
+  text-decoration: none;
+}
 .example-container {
   position: absolute;
   top: 60px;
@@ -11,7 +17,7 @@
   align-items: center;
   justify-content: center;
   width: 200px;
-  background: rgba(0, 13, 255, 0.5);
+  background: rgba(4, 11, 133, 0.623);
 }
 
 .example-header {
