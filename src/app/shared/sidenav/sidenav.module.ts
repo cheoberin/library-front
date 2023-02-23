@@ -16,8 +16,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCheckboxModule,
     MatFormFieldModule,
     MatToolbarModule,
-
-
+  ],
+  exports:[
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatToolbarModule,
   ]
 })
 export class SidenavModule { }

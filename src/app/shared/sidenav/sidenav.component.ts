@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -8,14 +8,4 @@ import {FormBuilder} from '@angular/forms';
   styleUrls: ['./sidenav.component.scss']
 })
 
-export class SidenavComponent {
-  options = this._formBuilder.group({
-    bottom: 0,
-    fixed: false,
-    top: 0,
-});
-
-constructor(private _formBuilder: FormBuilder) {}
-
-  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(window.location.host);
-}
+export class SidenavComponent {}

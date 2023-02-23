@@ -7,7 +7,7 @@ import { Book } from '../model/book';
   styleUrls: ['./books.component.scss']
 })
 
-export class BooksComponent implements OnInit{
+export class BooksComponent implements OnInit {
 
 books: Book[] = [
   {_id:'1', name:'Aprendendo Angular', genre:'Suspense', author:'Bene'}

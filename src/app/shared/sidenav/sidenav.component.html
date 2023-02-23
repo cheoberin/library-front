@@ -1,1 +1,34 @@
 
+<mat-toolbar class="example-header">Library</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+
+    <div>
+      <ul>
+        <a [routerLink]="['/home']">
+          <li>Home</li>
+        </a>
+        <a [routerLink]="['/books']">
+          <li>Books</li>
+        </a>
+        <a [routerLink]="['/lancamentos']">
+          <li>Genres</li>
+        </a>
+        <a [routerLink]="['/cadastro-de-lancamentos']">
+          <li>Publisher</li>
+        </a>
+        <a [routerLink]="['/']">
+          <li>Users</li>
+        </a>
+      </ul>
+    </div>
+
+  </mat-sidenav>
+
+</mat-sidenav-container>
+
+<mat-toolbar class="example-footer">Footer</mat-toolbar>

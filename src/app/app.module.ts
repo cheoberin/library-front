@@ -12,7 +12,8 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
