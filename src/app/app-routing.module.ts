@@ -1,14 +1,16 @@
-import { BooksComponent } from './books/books/books.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BooksReadComponent } from './features/books/books-read/books-read.component';
+import { HomeComponent } from './features/home/home.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo:''},
-  {path: 'home', pathMatch: 'full', redirectTo:''},
-
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'books',
-    loadChildren: () => import('./books/books.module').then(m => m.BooksModule)
+    component: BooksReadComponent
   }
 ];
 

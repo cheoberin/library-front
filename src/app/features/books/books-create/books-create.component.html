@@ -1,0 +1,36 @@
+<div class="grid p-fluid">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText> 
+            <label for="float-input">Book Name</label>
+        </span>
+    </div>
+</div>
+<div class="grid">
+    <div class="col-12">
+        <div class="p-inputgroup">
+            <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" defaultLabel="Select an Author" optionLabel="name"></p-multiSelect>    
+            <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" defaultLabel="Select an Author" optionLabel="name"></p-multiSelect>
+        </div>
+    </div>
+</div>
+<div class="grid p-fluid">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText> 
+            <label for="float-input">Pages</label>
+        </span>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText> 
+            <label for="float-input">Year</label>
+        </span>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input id="float-input" type="text" pInputText> 
+            <label for="float-input">ASIN</label>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+.container{
+    height: calc(100vh - 130px);
+    
+    mat-sidenav{
+        background-color: black;        
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 12%;
+
+        p,i{  
+            color: whitesmoke;
+            padding-left: 0.1rem;
+            padding-right: 0.2rem;
+            vertical-align: text-bottom;
+        }
+        
+       
+    }
+    
+    
+}
+

@@ -1,0 +1,18 @@
+:host ::ng-deep {
+    .p-inputtext {
+        display: block;
+        margin-bottom: .5rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .p-multiselect {
+        min-width: 15rem;
+        width: 18rem;
+    }
+}
+
+.field * {
+    display: block;
+}
