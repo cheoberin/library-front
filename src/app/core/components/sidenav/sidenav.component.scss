@@ -1,13 +1,12 @@
 .container{
-    height: calc(100vh - 130px);
-    
+    height: calc(100vh - 80px);
+    z-index: 5;
     mat-sidenav{
         background-color: black;        
         display: flex;
         align-items: center;
         flex-direction: column;
         width: 12%;
-
         p,i{  
             color: whitesmoke;
             padding-left: 0.1rem;

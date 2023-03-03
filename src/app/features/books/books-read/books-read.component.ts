@@ -30,7 +30,9 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ref!: DynamicDialogRef;
 
-  constructor(private service : BookService , public  dialogService: DialogService) { }
+    constructor(private service : BookService , public  dialogService: DialogService) { 
+
+    }
 
     ngOnInit(): void {}
 
@@ -38,38 +40,41 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
         this.ref = this.dialogService.open(BooksCreateComponent, {
         header: 'Create a new book',
         width: '70%',
-        height: '60%'
+        height: 'auto',
+        resizable : true,
+        draggable : true,
+        baseZIndex : 10,
+        maximizable: true  
       });
     }
 
-  ngAfterViewInit() {
-     this.findAll().subscribe((resp) => {
-      this.dataSource = new MatTableDataSource<Book>(resp);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-  }
-
-  findAll():Observable<Book[]>{
-    return this.books$ = this.service.findAll();
-  }
-
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    ngAfterViewInit() {
+        this.findAll().subscribe((resp) => {
+        this.dataSource = new MatTableDataSource<Book>(resp);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
     }
-  }
 
-  ngOnDestroy() {
-    if (this.ref) {
-      this.ref.close();
+    findAll():Observable<Book[]>{
+      return this.books$ = this.service.findAll();
     }
-  }
-  
+
+
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    }
+
+    ngOnDestroy() {
+      if (this.ref) {
+        this.ref.close();
+      }
+    }
   
 }
 

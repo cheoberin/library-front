@@ -17,6 +17,12 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {CalendarModule} from 'primeng/calendar';
+import {TooltipModule} from 'primeng/tooltip';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DropdownModule} from 'primeng/dropdown';
+import {ImageModule} from 'primeng/image';
 
 @NgModule({
   declarations: [
@@ -39,7 +45,13 @@ import { FormsModule } from '@angular/forms';
     DynamicDialogModule,
     InputTextModule,
     MultiSelectModule,
-    FormsModule
+    FormsModule,
+    InputNumberModule,
+    CalendarModule,
+    TooltipModule,
+    InputTextareaModule,
+    DropdownModule,
+    ImageModule
   ],
   exports:[
     BooksReadComponent,

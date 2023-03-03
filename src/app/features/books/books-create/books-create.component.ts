@@ -3,11 +3,20 @@ import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 
 
-interface City {
+interface Author {
   name: string,
-  code: string
+  id: string
 }
 
+interface Publisher {
+  name: string,
+  id: string
+}
+
+interface Genre {
+  name: string,
+  id: string
+}
 
 
 @Component({
@@ -17,19 +26,52 @@ interface City {
 })
 export class BooksCreateComponent implements OnInit{
 
-  cities!: City[];
+  imgLinkDefault!: string;
+  imgLink!: string;
 
-  selectedCities!: City[];
+  publishers!: Publisher[];
+  authors!: Author[];
+  genres!: Genre[];
+  value4!: number;
+  date10!: Date;
+
+  selectedAuthors!: Author[];
+  selectedGenres!: Genre[];
+  selectedPublishers!: Publisher;
+
 
   constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig){
-    this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Rome', code: 'RM'},
-      {name: 'London', code: 'LDN'},
-      {name: 'Istanbul', code: 'IST'},
-      {name: 'Paris', code: 'PRS'}
+    
+    this.authors = [
+      {name: 'New York', id: 'NY'},
+      {name: 'Rome', id: 'RM'},
+      {name: 'London', id: 'LDN'},
+      {name: 'Istanbul', id: 'IST'},
+      {name: 'Paris', id: 'PRS'}
     ];
 
+    this.genres = [
+      {name: 'New York', id: 'NY'},
+      {name: 'Rome', id: 'RM'},
+      {name: 'London', id: 'LDN'},
+      {name: 'Istanbul', id: 'IST'},
+      {name: 'Paris', id: 'PRS'}
+    ];
+
+    this.publishers = [
+      {name: 'New York', id: 'NY'},
+      {name: 'Rome', id: 'RM'},
+      {name: 'London', id: 'LDN'},
+      {name: 'Istanbul', id: 'IST'},
+      {name: 'Paris', id: 'PRS'}
+    ];
+    
+    this.imgLinkDefault = "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg";
+    
+  }
+
+  setCoverLink(){
+    this.imgLinkDefault = this.imgLink;
   }
 
   ngOnInit(): void {}

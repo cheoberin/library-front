@@ -1,36 +1,89 @@
 <div class="grid p-fluid">
     <div class="col-12 md:col-4">
-        <span class="p-float-label">
-            <input id="float-input" type="text" pInputText> 
-            <label for="float-input">Book Name</label>
+        <span class="p-input-icon-right ">
+            <input [required]="true" type="text" pInputText pTooltip="Enter book name" placeholder="Book Name" required="true"/>
         </span>
     </div>
 </div>
-<div class="grid">
-    <div class="col-12">
-        <div class="p-inputgroup">
-            <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" defaultLabel="Select an Author" optionLabel="name"></p-multiSelect>    
-            <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" defaultLabel="Select an Author" optionLabel="name"></p-multiSelect>
+
+<div class="grid p-fluid justify-content-between mt-1">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup h-3rem">
+            <span class="p-inputgroup-addon"><i class="material-icons">psychology</i></span>
+            <p-multiSelect 
+            [required]="true"
+            pTooltip="Select one or more authors"
+            [panelStyle]="{'width':'22rem'}"
+            [style]="{'width':'22rem','height':'3rem'}"
+            [options]="authors" 
+            [(ngModel)]="selectedAuthors" defaultLabel="Select Authors" optionLabel="name" display="chip"></p-multiSelect>         
+        </div>
+    </div>
+    <div class="col-12 md:col-4" [style]="{'margin-right':'8rem'}">
+        <div class="p-inputgroup h-3rem">
+            <span class="p-inputgroup-addon"><i class="material-icons">category</i></span>
+            <p-multiSelect
+            [required]="true" 
+            pTooltip="Select one or more genres"
+            [panelStyle]="{'width':'22rem'}" 
+            [style]="{'width':'22rem','height':'3rem'}" 
+            [options]="genres"
+            [(ngModel)]="selectedGenres" 
+            defaultLabel="Select Genres" optionLabel="name" display="chip"></p-multiSelect>         
         </div>
     </div>
 </div>
-<div class="grid p-fluid">
+
+<div class="grid p-fluid mt-2">
     <div class="col-12 md:col-4">
         <span class="p-float-label">
-            <input id="float-input" type="text" pInputText> 
-            <label for="float-input">Pages</label>
+            <p-inputNumber [required]="true" pTooltip="Enter the number of pages" [(ngModel)]="value4" inputId="minmax" inputId="minmax" mode="decimal" [min]="1" [max]="20000"></p-inputNumber> 
+            <label for="float-input">Nº of Pages</label>
         </span>
     </div>
     <div class="col-12 md:col-4">
         <span class="p-float-label">
-            <input id="float-input" type="text" pInputText> 
+            <p-calendar [required]="true" pTooltip="Select launch year" [(ngModel)]="date10" view="year" dateFormat="yy" inputId="yearpicker"></p-calendar> 
             <label for="float-input">Year</label>
         </span>
     </div>
     <div class="col-12 md:col-4">
         <span class="p-float-label">
-            <input id="float-input" type="text" pInputText> 
+            <input [required]="true" pTooltip="Enter book Asin" id="float-input" type="text" pInputText> 
             <label for="float-input">ASIN</label>
         </span>
     </div>
 </div>
+<div class="grid p-fluid mt-3">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label" pTooltip="Enter book Summary" >
+            <textarea [required]="true" id="float-input" rows="5" cols="30" pInputTextarea></textarea>
+        <label for="float-input">Summary</label>
+        </span>
+    </div>
+</div>
+<div class="grid p-fluid mt-1">
+    <div class="col-12 md:col-4">
+        <div class="p-inputgroup h-3rem">
+            <span class="p-inputgroup-addon"><i class="material-icons">business_center</i></span>
+            <p-dropdown 
+            [optionValue]="''" 
+            [required]="true"
+            [panelStyle]="{'width':'22rem'}"
+            [style]="{'width':'22rem','height':'3rem'}"
+            [options]="publishers" 
+            [(ngModel)]="selectedPublishers" placeholder="Select Publisher" optionLabel="name" ></p-dropdown>         
+        </div>
+    </div>
+</div>
+<div class="grid p-fluid mt-1">
+    <div class="col-12 md:col-4">
+        <p-image src="{{imgLinkDefault}}" alt="Image" width="250" [preview]="true"></p-image>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-inputgroup">
+            <input [required]="true" type="text" pInputText pTooltip="Enter book cover Link" placeholder="Book Cover Link" [(ngModel)]="imgLink"/>
+            <button type="button" pButton pRipple icon="pi pi-check" styleClass="p-button-success" (click)="setCoverLink()"></button>
+        </span>
+    </div>
+</div>       
