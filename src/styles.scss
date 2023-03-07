@@ -1,9 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
-@import '@angular/material/theming';
-@include mat-core();
+@use '@angular/material' as mat;
 
-// $custom-app-primary: mat-pallete($mat-blue);
-// $custom-app-primary: mat-pallete($mat-indigo, A200, A400, 700);
+@include mat.core();
+
+
+$library-front-primary: mat.define-palette(mat.$indigo-palette);
+$library-front-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+
+$library-front-warn: mat.define-palette(mat.$red-palette);
+
+$library-front-theme: mat.define-light-theme((
+  color: (
+    primary: $library-front-primary,
+    accent: $library-front-accent,
+    warn: $library-front-warn,
+  )
+));
+
+
+@include mat.all-component-themes($library-front-theme);
+
+@import 'node_modules/primeflex/primeflex.css';
+@import 'node_modules/primeflex/themes/saga-blue.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeng/resources/themes/bootstrap4-light-blue/theme.css';
+@import '~primeicons/primeicons.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+.p-component,
+.p-component *,
+.p-skeleton,
+.skeleton * {
+    box-sizing: border-box;
+}
+
+.p-skeleton {
+    background-color: #e9ecef;
+    border-radius: 3px;
+}
+.p-skeleton:after {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+}
+
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

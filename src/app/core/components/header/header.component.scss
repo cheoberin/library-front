@@ -1,0 +1,20 @@
+.header {
+    background-color: black;
+    color: antiquewhite;
+    height: 5em;
+    display: flex;
+    justify-content: space-between;
+  
+    span {
+        font-weight: bold;
+        padding-right: 50%;
+    }
+    button{
+        background-color: black;
+        color: antiquewhite;
+        :hover{
+            cursor: pointer;
+        }
+    }
+  }  
+  
