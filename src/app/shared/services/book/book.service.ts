@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class BookService {
-  baseUrl: String = environment.baseUrl;
-  
+  baseUrl: string = environment.baseUrl;
+
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +19,5 @@ export class BookService {
     const url = this.baseUrl + "/book";
     return this.http.get<Book[]>(url);
   }
-  
+
 }

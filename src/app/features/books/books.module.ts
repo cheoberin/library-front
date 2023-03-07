@@ -23,6 +23,8 @@ import {TooltipModule} from 'primeng/tooltip';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DropdownModule} from 'primeng/dropdown';
 import {ImageModule} from 'primeng/image';
+import {RippleModule} from "primeng/ripple";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import {ImageModule} from 'primeng/image';
     TooltipModule,
     InputTextareaModule,
     DropdownModule,
-    ImageModule
+    ImageModule,
+    RippleModule,
+    MatSortModule
   ],
   exports:[
     BooksReadComponent,

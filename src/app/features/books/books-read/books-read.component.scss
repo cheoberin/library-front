@@ -9,7 +9,7 @@
     text-align: center;
     }
   }
-  
+
   .books-create{
     padding: 8px;
     button{
@@ -20,30 +20,27 @@
       align-items: center;
       justify-content: space-around;
     }
-   
+
   }
-  
+
   .table-container{
       width: 80%;
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-  
-  
+      margin: 40px auto;
+  }
+
+
   table {
       width: 100%;
     }
-    
+
     .mat-mdc-form-field {
       font-size: 14px;
       width: 100%;
     }
-    
+
     td, th {
       width: 25%;
-    
+
     }
-  
-  
+
+
