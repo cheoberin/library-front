@@ -2,7 +2,6 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 import { BooksCreateComponent } from '../books-create/books-create.component';
 import { Observable } from 'rxjs';
 import { Book } from 'src/app/core/models/book';
@@ -22,7 +21,7 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
 
   displayedColumns: string[] = ['id', 'name', 'asin', 'publicationYear'];
   dataSource = new MatTableDataSource<Book>();
-  
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -30,9 +29,7 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ref!: DynamicDialogRef;
 
-    constructor(private service : BookService , public  dialogService: DialogService) { 
-
-    }
+    constructor(private service : BookService , public  dialogService: DialogService) {}
 
     ngOnInit(): void {}
 
@@ -44,7 +41,7 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
         resizable : true,
         draggable : true,
         baseZIndex : 10,
-        maximizable: true  
+        maximizable: true
       });
     }
 
@@ -75,6 +72,6 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
         this.ref.close();
       }
     }
-  
+
 }
 

@@ -1,6 +1,6 @@
 .footer{
     height: 6rem;
-    position: relative;
+    position: absolute;
     bottom: -5.1vh;
     display: flex;
     align-items: center;
@@ -12,8 +12,7 @@
 p {
     color: antiquewhite;
     margin: 0;
-    font-size: 1;
     background-color: rgb(44, 42, 42);
     padding: 0 8%;
-    
+
 }
