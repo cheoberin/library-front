@@ -1,4 +1,4 @@
-<mat-sidenav-container class='container' >
+<!---<mat-sidenav-container class='container' >
     <mat-sidenav #sidenav mode="side" class="mat-elevation-z4">
       <mat-nav-list class="nav-list">
           <a mat-list-item>
@@ -25,4 +25,32 @@
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-container>
+--->
 
+<mat-sidenav-container class='container'>
+  <mat-sidenav #sidenav mode="side" class="mat-elevation-z4">
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/" routerLinkActive="active-link">
+        <p><i class="material-icons">home</i>Home</p>
+      </a>
+      <a mat-list-item routerLink="/books" routerLinkActive="active-link">
+        <p><i class="material-icons">book</i>Books</p>
+      </a>
+      <a mat-list-item routerLink="/authors" routerLinkActive="active-link">
+        <p><i class="material-icons">psychology</i>Authors</p>
+      </a>
+      <a mat-list-item routerLink="/genres" routerLinkActive="active-link">
+        <p><i class="material-icons">category</i>Genres</p>
+      </a>
+      <a mat-list-item routerLink="/publishers" routerLinkActive="active-link">
+        <p><i class="material-icons">business_center</i>Publishers</p>
+      </a>
+      <a mat-list-item routerLink="/users" routerLinkActive="active-link">
+        <p><i class="material-icons" >manage_accounts</i>Users</p>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <div class="side-nav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
