@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {BookService} from "../../../shared/services/book/book.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Book, IBook} from "../../../core/models/book";
@@ -7,7 +7,7 @@ import {IPublisher} from "../../../core/models/Publisher";
 import {IAuthor} from "../../../core/models/Author";
 import {IGenre} from "../../../core/models/Genre";
 import {environment} from "../../../../environments/environment";
-
+import {ConfirmationService} from 'primeng/api';
 
 
 @Component({
@@ -28,7 +28,8 @@ export class BooksUpdateComponent implements OnInit {
   bookForm!: FormGroup;
 
  constructor(private service: BookService, private fb: FormBuilder,
-             private config: DynamicDialogConfig){
+             private config: DynamicDialogConfig,public ref: DynamicDialogRef,
+             private confirmation: ConfirmationService){
 
    this.bookForm = this.fb.group({
      id:[this.config.data.id],
@@ -45,6 +46,17 @@ export class BooksUpdateComponent implements OnInit {
    })
 
  }
+
+  updateConfirmation(){
+    this.confirmation.confirm({
+      message: 'Are you sure that you want to update?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.update();
+      }
+    })
+  }
   update(): void{
     this.newBook = new Book(this.bookForm.value)
     this.service.update(this.newBook).subscribe((resp) =>{
@@ -53,10 +65,11 @@ export class BooksUpdateComponent implements OnInit {
       console.log(error)
       this.service.message("Book was not updated!","error");
     })
+
   }
 
   getBookInfos(id:string){
-   this.service.findbyId(id).subscribe((resp)=>{
+   this.service.findById(id).subscribe((resp)=>{
 
      this.bookForm.setValue({
             id:resp.id,
@@ -77,13 +90,13 @@ export class BooksUpdateComponent implements OnInit {
      })
   }
 
-  setCoverLink(){
-    this.imgLinkDefault = this.imgLink;
-
-    this.bookForm.patchValue({
-      bookCover: this.imgLinkDefault
+  closeForm(){
+    this.confirmation.confirm({
+      message: 'Are you sure that you want cancel?',
+      accept: () => {
+        this.ref.close();
+      }
     })
-
   }
 
   ngOnInit(){

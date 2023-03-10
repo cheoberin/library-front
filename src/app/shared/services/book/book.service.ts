@@ -19,7 +19,7 @@ export class BookService {
               private messageServ: MessageService) { }
 
 
-  findbyId(id:string):Observable<IBook>{
+  findById(id:string):Observable<IBook>{
     const url = this.baseUrl + `/book/` + id;
     return this.http.get<IBook>(url);
   }
@@ -32,7 +32,7 @@ export class BookService {
     return this.http.post<Book>(url, book);
   }
   update(book: Book): Observable<Book>{
-    const url = this.baseUrl + "/book/"+ book.id;
+    const url = this.baseUrl + "/book";
     return this.http.put<Book>(url, book);
   }
   message(msg: string, severity :string):void{

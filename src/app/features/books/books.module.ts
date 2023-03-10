@@ -25,12 +25,11 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ImageModule} from 'primeng/image';
 import {RippleModule} from "primeng/ripple";
 import {MatSortModule} from "@angular/material/sort";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import { BooksUpdateComponent } from './books-update/books-update.component';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -65,7 +64,8 @@ import { BooksUpdateComponent } from './books-update/books-update.component';
         MatSortModule,
         MessagesModule,
         MessageModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ConfirmDialogModule
     ],
   exports:[
     BooksReadComponent,
@@ -73,7 +73,8 @@ import { BooksUpdateComponent } from './books-update/books-update.component';
   ],
   providers:[
     BookService,
-    MessageService
+    MessageService,
+    ConfirmationService
   ]
 })
 export class BooksModule { }

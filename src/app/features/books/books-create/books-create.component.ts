@@ -6,6 +6,8 @@ import {environment} from "../../../../environments/environment";
 import {IAuthor} from "../../../core/models/Author";
 import {IGenre} from "../../../core/models/Genre";
 import {IPublisher} from "../../../core/models/Publisher";
+import {DynamicDialogRef} from "primeng/dynamicdialog";
+import {ConfirmationService} from "primeng/api";
 
 
 @Component({
@@ -23,7 +25,8 @@ export class BooksCreateComponent implements OnInit{
   private newBook!: Book;
   bookForm!: FormGroup;
 
-  constructor(private service: BookService,private fb: FormBuilder ){
+  constructor(private service: BookService,private fb: FormBuilder,public ref: DynamicDialogRef,
+              private confirmation: ConfirmationService ){
 
     this.authors = [
       {name: 'New York', id: 'NY'},
@@ -55,6 +58,7 @@ export class BooksCreateComponent implements OnInit{
 
   create(): void{
     if(this.bookForm.invalid){
+      this.service.message("Book was not created!","error");
       return;
     }
     this.newBook = new Book(this.bookForm.value)
@@ -66,8 +70,24 @@ export class BooksCreateComponent implements OnInit{
     })
   }
 
-  setCoverLink(){
-    this.imgLinkDefault = this.imgLink;
+  updateConfirmation(){
+    this.confirmation.confirm({
+      message: 'Are you sure that you want to update?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.create();
+      }
+    })
+  }
+
+  closeForm(){
+    this.confirmation.confirm({
+      message: 'Are you sure that you want cancel?',
+      accept: () => {
+        this.ref.close();
+      }
+    })
   }
 
   ngOnInit() {

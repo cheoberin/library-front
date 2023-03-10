@@ -13,6 +13,7 @@ import { MatListModule} from '@angular/material/list';
 import { AppRoutingModule } from '../app-routing.module';
 import { SideNavService } from '../shared/services/side-nav/side-nav.service';
 import { FeaturesModule } from '../features/features.module';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,18 +21,19 @@ import { FeaturesModule } from '../features/features.module';
     SidenavComponent,
     FooterComponent
   ],
-  imports: [
-    CommonModule,
-    ButtonModule,
-    SidebarModule,
-    ToolbarModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    AppRoutingModule,
-    FeaturesModule
-  ],
+    imports: [
+        CommonModule,
+        ButtonModule,
+        SidebarModule,
+        ToolbarModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        AppRoutingModule,
+        FeaturesModule,
+        ReactiveFormsModule
+    ],
   exports:[
     HeaderComponent,
     SidenavComponent,
