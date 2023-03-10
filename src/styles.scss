@@ -47,7 +47,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
 }
 
-
+.mat-mdc-snack-bar-container {
+  &.blue-snackbar {
+    --mdc-snackbar-container-color: #2196f3;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
 
 ::-webkit-scrollbar {
   width: 10px;

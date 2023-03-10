@@ -1,71 +1,68 @@
-<form [formGroup]="bookForm" (ngSubmit)="create()">
-<div class="grid p-fluid">
+<form [formGroup]="bookForm" (ngSubmit)="update()">
+  <div class="grid p-fluid mt-1">
     <div class="col-12 md:col-4">
-        <span class="p-input-icon-right ">
+        <span class="p-float-label">
             <input
-              [required]="true"
+              pTooltip="Enter book Name"
+              id="float-input-name"
               type="text"
               pInputText
-              pTooltip="Enter book name"
-              placeholder="Book Name"
-              required="true"
               formControlName="name"
             />
+          <label for="float-input-pages">Book Name</label>
           <small class="p-error block"
                  *ngIf="bookForm.get('name')?.invalid && bookForm.get('name')?.dirty">
             Book Name is required</small>
         </span>
     </div>
-</div>
-
-<div class="grid p-fluid justify-content-between mt-1">
-    <div class="col-12 md:col-4">
-        <div>
-            <span><i class="material-icons">psychology</i></span>
-            <p-multiSelect
-            pTooltip="Select one or more authors"
-            [options]="authors"
-            formControlName="authors"
-            defaultLabel="Select Authors"
-            optionLabel="name"
-            display="chip"
-            >
-            </p-multiSelect>
-            <small class="p-error block"
-                 *ngIf="bookForm.get('authors')?.invalid && bookForm.get('authors')?.dirty">
-           At least one Author is required</small>
-      </div>
   </div>
-  <div class="col-12 md:col-4" >
+
+  <div class="grid p-fluid justify-content-between mt-1">
+    <div class="col-12 md:col-4">
+      <div>
+        <span><i class="material-icons">psychology</i></span>
+        <p-multiSelect
+          pTooltip="Select one or more authors"
+          [options]="authors"
+          formControlName="authors"
+          defaultLabel="Select Authors"
+          optionLabel="name"
+        >
+        </p-multiSelect>
+        <small class="p-error block"
+               *ngIf="bookForm.get('authors')?.invalid && bookForm.get('authors')?.dirty">
+          At least one Author is required</small>
+      </div>
+    </div>
+    <div class="col-12 md:col-4" >
       <div >
-          <span><i class="material-icons">category</i></span>
-          <p-multiSelect
-            pTooltip="Select one or more genres"
-            [options]="genres"
-            formControlName="genres"
-            defaultLabel="Select Genres"
-            optionLabel="name"
-            display="chip"
-          ></p-multiSelect>
-          <small class="p-error block"
+        <span><i class="material-icons">category</i></span>
+        <p-multiSelect
+          pTooltip="Select one or more genres"
+          [options]="genres"
+          formControlName="genres"
+          defaultLabel="Select Genres"
+          optionLabel="name"
+          display="chip"
+        ></p-multiSelect>
+        <small class="p-error block"
                *ngIf="bookForm.get('genres')?.invalid && bookForm.get('genres')?.dirty">
           At least one Genre is required</small>
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="grid p-fluid mt-2">
+  <div class="grid p-fluid mt-2">
     <div class="col-12 md:col-4">
         <span class="p-float-label">
             <p-inputNumber
-              [required]="true"
               id="float-input-pages"
               pTooltip="Enter the number of pages"
               inputId="minmax"
               mode="decimal"
               [max]="20000"
               formControlName="pages"
-              ></p-inputNumber>
+            ></p-inputNumber>
             <label for="float-input-pages">Nº of Pages</label>
             <small class="p-error block"
                    *ngIf="bookForm.get('pages')?.invalid && bookForm.get('pages')?.dirty">
@@ -75,14 +72,13 @@
     <div class="col-12 md:col-4">
         <span class="p-float-label">
             <p-calendar
-              [required]="true"
               id="float-input-year"
               pTooltip="Select launch year"
               view="year"
               dateFormat="yy"
               inputId="yearpicker"
               formControlName="publicationYear"
-              ></p-calendar>
+            ></p-calendar>
             <label for="float-input-year">Year</label>
             <small class="p-error block"
                    *ngIf="bookForm.get('publicationYear')?.invalid && bookForm.get('publicationYear')?.dirty">
@@ -92,25 +88,23 @@
     <div class="col-12 md:col-4">
         <span class="p-float-label">
             <input
-              [required]="true"
               pTooltip="Enter book Asin"
               id="float-input-asin"
               type="text"
               pInputText
               formControlName="asin"
-              />
+            />
             <label for="float-input-asin">ASIN</label>
             <small class="p-error block"
                    *ngIf="bookForm.get('asin')?.invalid && bookForm.get('asin')?.dirty">
           Asin or ISBN code is required</small>
         </span>
     </div>
-</div>
-<div class="grid p-fluid mt-3">
+  </div>
+  <div class="grid p-fluid mt-3">
     <div class="col-12 md:col-4">
         <span class="p-float-label" pTooltip="Enter book Summary" >
             <textarea
-              [required]="true"
               id="float-input-summary"
               rows="5"
               cols="30"
@@ -123,33 +117,31 @@
           Summary text is required</small>
         </span>
     </div>
-</div>
-<div class="grid p-fluid mt-1">
+  </div>
+  <div class="grid p-fluid mt-1">
     <div class="col-12 md:col-4">
-        <div>
-            <span><i class="material-icons">business_center</i></span>
-            <p-dropdown
-            [optionValue]="''"
-            [required]="true"
-            [options]="publishers"
-            formControlName="publisher"
-            placeholder="Select Publisher"
-            optionLabel="name"
-            ></p-dropdown>
-          <small class="p-error block"
-                 *ngIf="bookForm.get('publisher')?.invalid && bookForm.get('publisher')?.dirty">
-            Publisher is required</small>
-        </div>
+      <div>
+        <span><i class="material-icons">business_center</i></span>
+        <p-dropdown
+          [optionValue]="''"
+          [options]="publishers"
+          formControlName="publisher"
+          placeholder="Select Publisher"
+          optionLabel="name"
+        ></p-dropdown>
+        <small class="p-error block"
+               *ngIf="bookForm.get('publisher')?.invalid && bookForm.get('publisher')?.dirty">
+          Publisher is required</small>
+      </div>
     </div>
-</div>
-<div class="grid p-fluid mt-2">
+  </div>
+  <div class="grid p-fluid mt-2">
     <div class="col-12 md:col-4">
-        <p-image src="{{imgLinkDefault}}" alt="Image" width="250px" height="300px" [preview]="true"></p-image>
+      <p-image src="{{imgLinkDefault}}" alt="Image"  width="250px" height="300px" [preview]="true"></p-image>
     </div>
     <div class="col-12 md:col-4">
         <span class="p-inputgroup">
             <input
-              [required]="true"
               type="text"
               pInputText pTooltip="Insert book cover Link"
               placeholder="Book Cover Link"
@@ -163,10 +155,11 @@
                    *ngIf="bookForm.get('bookCover')?.invalid && bookForm.get('bookCover')?.dirty">
             Book Cover Link is required</small>
         </span>
-        <p-messages></p-messages>
+
+      <p-messages></p-messages>
     </div>
-</div>
-<div>
-  <button type="submit" mat-raised-button [disabled]="bookForm.invalid">New<i class="material-icons">add_circle</i></button>
-</div>
+  </div>
+  <div>
+    <button type="submit" mat-raised-button [disabled]="bookForm.invalid">New<i class="material-icons">add_circle</i></button>
+  </div>
 </form>

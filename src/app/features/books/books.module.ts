@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {CalendarModule} from 'primeng/calendar';
 import {TooltipModule} from 'primeng/tooltip';
@@ -25,44 +25,55 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ImageModule} from 'primeng/image';
 import {RippleModule} from "primeng/ripple";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {MessageService} from "primeng/api";
+import { BooksUpdateComponent } from './books-update/books-update.component';
+
 
 @NgModule({
   declarations: [
     BooksReadComponent,
-    BooksCreateComponent
+    BooksCreateComponent,
+    BooksUpdateComponent
   ],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    AppRoutingModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    CommonModule,
-    SkeletonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    HttpClientModule,
-    MatInputModule,
-    MatButtonModule,
-    DynamicDialogModule,
-    InputTextModule,
-    MultiSelectModule,
-    FormsModule,
-    InputNumberModule,
-    CalendarModule,
-    TooltipModule,
-    InputTextareaModule,
-    DropdownModule,
-    ImageModule,
-    RippleModule,
-    MatSortModule
-  ],
+    imports: [
+        CommonModule,
+        MatTableModule,
+        AppRoutingModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        CommonModule,
+        SkeletonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        HttpClientModule,
+        MatInputModule,
+        MatButtonModule,
+        DynamicDialogModule,
+        InputTextModule,
+        MultiSelectModule,
+        FormsModule,
+        InputNumberModule,
+        CalendarModule,
+        TooltipModule,
+        InputTextareaModule,
+        DropdownModule,
+        ImageModule,
+        RippleModule,
+        MatSortModule,
+        MessagesModule,
+        MessageModule,
+        ReactiveFormsModule
+    ],
   exports:[
     BooksReadComponent,
     BooksCreateComponent
   ],
   providers:[
-    BookService
+    BookService,
+    MessageService
   ]
 })
 export class BooksModule { }
