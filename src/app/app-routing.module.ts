@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BooksReadComponent } from './features/books/books-read/books-read.component';
 import { HomeComponent } from './features/home/home.component';
 import {FooterComponent} from "./core/components/footer/footer.component";
+import {AuthorsReadComponent} from "./features/authors/authors-read/authors-read.component";
 
 const routes: Routes = [
   {
@@ -13,8 +14,8 @@ const routes: Routes = [
     path: 'books',
     component: BooksReadComponent
   },
-  {path:'test',
-    component:FooterComponent
+  {path:'authors',
+    component:AuthorsReadComponent
   }
 ];
 

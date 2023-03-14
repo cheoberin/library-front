@@ -8,19 +8,20 @@ import {Book, IBook} from 'src/app/core/models/book';
 import { BookService } from 'src/app/shared/services/book/book.service';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {BooksUpdateComponent} from "../books-update/books-update.component";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-books-read',
   templateUrl: './books-read.component.html',
   styleUrls: ['./books-read.component.scss'],
-  providers:[DialogService]
+  providers:[DialogService,ConfirmationService]
 })
 
 
 export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
   books$!: Observable<IBook[]>;
 
-  displayedColumns: string[] = ['id', 'name', 'asin', 'publicationYear','action'];
+  displayedColumns: string[] = ['name', 'asin', 'publicationYear','action'];
   dataSource = new MatTableDataSource<IBook>();
 
   @ViewChild(MatPaginator)
@@ -30,7 +31,8 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ref!: DynamicDialogRef;
 
-    constructor(private service : BookService , public  dialogService: DialogService) {}
+    constructor(private service : BookService , public  dialogService: DialogService,
+                private confirmationRead: ConfirmationService) {}
 
     ngOnInit(): void {}
 
@@ -41,15 +43,33 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
         height: 'auto',
         resizable : true,
         draggable : true,
-        baseZIndex : 10,
         maximizable: true
       });
     }
 
-    openDialogUpdate(){
+  deleteConfirmation(event: Event, bookId:string){
+    this.confirmationRead.confirm({
+      target: event.target!,
+      message: 'Are you sure that you want to delete this book?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.delete(bookId);
+      }
+    })
+  }
+  delete(bookId:string): void{
+    this.service.delete(bookId).subscribe((resp) =>{
+      this.service.message("Book deleted!","success")
+    }, error =>{
+      console.log(error)
+      this.service.message("Book was not deleted!","error");
+    })
+  }
+
+    openDialogUpdate(bookId:string){
       this.ref = this.dialogService.open(BooksUpdateComponent, {
         data:{
-          id:'63fd2f56e029183011a9822f'
+          id: bookId
         },
         header: 'Update a Book',
         width: '70%',

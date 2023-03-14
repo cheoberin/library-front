@@ -5,10 +5,7 @@ import { BehaviorSubject, EMPTY } from 'rxjs';
 export class SideNavService {
 
   constructor() {}
-
   public sideNavToggleSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-
 
   public toggle() {
     return this.sideNavToggleSubject.next(!this.sideNavToggleSubject.value)

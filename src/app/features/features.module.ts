@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeModule } from './home/home.module';
 import { BooksModule } from './books/books.module';
+import {AuthorsModule} from "./authors/authors.module";
 
 
 
@@ -10,7 +11,8 @@ import { BooksModule } from './books/books.module';
   imports: [
     CommonModule,
     HomeModule,
-    BooksModule
+    BooksModule,
+    AuthorsModule
   ],
   exports:[]
 })

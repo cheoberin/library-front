@@ -27,7 +27,6 @@
           formControlName="authors"
           defaultLabel="Select Authors"
           optionLabel="name"
-          display="chip"
         >
         </p-multiSelect>
         <small class="p-error block"
@@ -44,7 +43,6 @@
           formControlName="genres"
           defaultLabel="Select Genres"
           optionLabel="name"
-          display="chip"
         ></p-multiSelect>
         <small class="p-error block"
                *ngIf="bookForm.get('genres')?.invalid && bookForm.get('genres')?.dirty">
@@ -138,11 +136,11 @@
   </div>
   <div class="grid p-fluid mt-2">
     <div class="col-12 md:col-4">
-      <p-image src="{{imgLinkDefault}}" alt="Image"  width="250px" height="300px" [preview]="true"></p-image>
+      <p-image class="hover:shadow-8" src="{{imgLinkDefault}}" alt="Image"  width="250px" height="300px" [preview]="true"></p-image>
     </div>
     <div class="col-12 md:col-4">
       <h5 class="mb-1">Book Cover Link:</h5>
-      <span class="p-inputgroup">
+      <span class="p-inputgroup w-30rem">
             <input
               type="text"
               pInputText pTooltip="Insert book cover Link"
@@ -158,10 +156,10 @@
   </div>
   <div class="flex align-items-end justify-content-end">
     <div class="book-create">
-      <button type="submit" mat-raised-button [disabled]="bookForm.invalid">Create<i class="material-icons">add_circle_outline</i></button>
+      <button type="submit" mat-raised-button color="primary" [disabled]="bookForm.invalid">Create<i class="material-icons">add_circle_outline</i></button>
     </div>
     <div class="book-cancel-update">
-      <button type="button" mat-raised-button (click)="closeForm()" >Cancel<i class="material-icons">cancel</i></button>
+      <button type="button" mat-raised-button color="warn" (click)="closeForm()" >Cancel<i class="material-icons">cancel</i></button>
     </div>
   </div>
   <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

@@ -8,28 +8,32 @@ import {IAuthor} from "../../../core/models/Author";
 import {IGenre} from "../../../core/models/Genre";
 import {environment} from "../../../../environments/environment";
 import {ConfirmationService} from 'primeng/api';
+import {AuthorService} from "../../../shared/services/author/author.service";
+import {GenresService} from "../../../shared/services/genres/genres.service";
+import {PublisherService} from "../../../shared/services/publisher/publisher.service";
 
 
 @Component({
   selector: 'app-books-update',
   templateUrl: './books-update.component.html',
-  styleUrls: ['./books-update.component.scss']
+  styleUrls: ['./books-update.component.scss'],
+  providers:[ConfirmationService]
 })
 export class BooksUpdateComponent implements OnInit {
   imgLinkDefault: string = environment.imageBase;
-  imgLink!: string;
   publishers!: IPublisher[];
   authors!: IAuthor[];
   genres!: IGenre[];
-
   private newBook!: Book;
-
   book!: IBook;
   bookForm!: FormGroup;
-
- constructor(private service: BookService, private fb: FormBuilder,
+ constructor(private bookService: BookService,
+             private authorService: AuthorService,
+             private genreService: GenresService,
+             private  publisherService: PublisherService,
+             private fb: FormBuilder,
              private config: DynamicDialogConfig,public ref: DynamicDialogRef,
-             private confirmation: ConfirmationService){
+             private confirmationUpdate: ConfirmationService){
 
    this.bookForm = this.fb.group({
      id:[this.config.data.id],
@@ -42,13 +46,11 @@ export class BooksUpdateComponent implements OnInit {
      summary:['',[Validators.required,Validators.minLength(15)]],
      publisher: ['',[Validators.required]],
      bookCover: [this.imgLinkDefault ,[Validators.required,Validators.minLength(5)]]
-
    })
-
  }
 
   updateConfirmation(){
-    this.confirmation.confirm({
+    this.confirmationUpdate.confirm({
       message: 'Are you sure that you want to update?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
@@ -57,20 +59,19 @@ export class BooksUpdateComponent implements OnInit {
       }
     })
   }
+
   update(): void{
     this.newBook = new Book(this.bookForm.value)
-    this.service.update(this.newBook).subscribe((resp) =>{
-      this.service.message("Book updated successfully!","success")
+    this.bookService.update(this.newBook).subscribe((resp) =>{
+      this.bookService.message("Book updated successfully!","success")
     }, error =>{
       console.log(error)
-      this.service.message("Book was not updated!","error");
+      this.bookService.message("Book was not updated!","error");
     })
-
   }
 
   getBookInfos(id:string){
-   this.service.findById(id).subscribe((resp)=>{
-
+   this.bookService.findById(id).subscribe((resp)=>{
      this.bookForm.setValue({
             id:resp.id,
             name:resp.name,
@@ -84,14 +85,21 @@ export class BooksUpdateComponent implements OnInit {
             bookCover: this.imgLinkDefault})
 
      this.imgLinkDefault = resp.bookCover!;
-     this.authors = resp.authors!;
-     this.genres = resp.genres!;
-     this.publishers = Array.of(resp.publisher!);
-     })
+   });
+
+   this.authorService.findAll().subscribe((resp) =>{
+     this.authors = resp;
+   });
+   this.genreService.findAll().subscribe((resp)=>{
+     this.genres = resp;
+   });
+   this.publisherService.findAll().subscribe((resp)=>{
+     this.publishers = resp;
+   });
   }
 
   closeForm(){
-    this.confirmation.confirm({
+    this.confirmationUpdate.confirm({
       message: 'Are you sure that you want cancel?',
       accept: () => {
         this.ref.close();

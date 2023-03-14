@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {BookService} from "../../../shared/services/book/book.service";
-import {Book, IBook} from "../../../core/models/book";
+import {Book} from "../../../core/models/book";
 import {FormBuilder,FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../environments/environment";
 import {IAuthor} from "../../../core/models/Author";
 import {IGenre} from "../../../core/models/Genre";
 import {IPublisher} from "../../../core/models/Publisher";
 import {DynamicDialogRef} from "primeng/dynamicdialog";
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {AuthorService} from "../../../shared/services/author/author.service";
+import {GenresService} from "../../../shared/services/genres/genres.service";
+import {PublisherService} from "../../../shared/services/publisher/publisher.service";
 
 
 @Component({
   selector: 'app-books-create',
   templateUrl: './books-create.component.html',
-  styleUrls: ['./books-create.component.scss']
+  styleUrls: ['./books-create.component.scss'],
+  providers:[ConfirmationService]
 })
 export class BooksCreateComponent implements OnInit{
 
@@ -25,32 +29,15 @@ export class BooksCreateComponent implements OnInit{
   private newBook!: Book;
   bookForm!: FormGroup;
 
-  constructor(private service: BookService,private fb: FormBuilder,public ref: DynamicDialogRef,
-              private confirmation: ConfirmationService ){
+  constructor(private bookService: BookService,
+              private authorService: AuthorService,
+              private genreService: GenresService,
+              private  publisherService: PublisherService,
+              private fb: FormBuilder,
+              public ref: DynamicDialogRef,
+              private confirmationCreate: ConfirmationService ){
 
-    this.authors = [
-      {name: 'New York', id: 'NY'},
-      {name: 'Rome', id: 'RM'},
-      {name: 'London', id: 'LDN'},
-      {name: 'Istanbul', id: 'IST'},
-      {name: 'Paris', id: 'PRS'}
-    ];
 
-    this.genres = [
-      {name: 'New York', id: 'NY'},
-      {name: 'Rome', id: 'RM'},
-      {name: 'London', id: 'LDN'},
-      {name: 'Istanbul', id: 'IST'},
-      {name: 'Paris', id: 'PRS'}
-    ];
-
-    this.publishers = [
-      {name: 'New York', id: 'NY'},
-      {name: 'Rome', id: 'RM'},
-      {name: 'London', id: 'LDN'},
-      {name: 'Istanbul', id: 'IST'},
-      {name: 'Paris', id: 'PRS'}
-    ];
 
     this.imgLinkDefault = environment.imageBase;
 
@@ -58,20 +45,32 @@ export class BooksCreateComponent implements OnInit{
 
   create(): void{
     if(this.bookForm.invalid){
-      this.service.message("Book was not created!","error");
+      this.bookService.message("Book was not created!","error");
       return;
     }
     this.newBook = new Book(this.bookForm.value)
-    this.service.create(this.newBook).subscribe((resp) =>{
-      this.service.message("Book created successfully!","success")
+    this.bookService.create(this.newBook).subscribe((resp) =>{
+      this.bookService.message("Book created successfully!","success")
     }, error =>{
       console.log(error)
-      this.service.message("Book was not created!","error");
+      this.bookService.message("Book was not created!","error");
     })
   }
 
+  getMultiselectInfos(){
+   this.authorService.findAll().subscribe((resp) =>{
+     this.authors = resp;
+   });
+   this.genreService.findAll().subscribe((resp) =>{
+     this.genres = resp;
+   });
+   this.publisherService.findAll().subscribe((resp)=>{
+     this.publishers = resp;
+   });
+  }
+
   updateConfirmation(){
-    this.confirmation.confirm({
+    this.confirmationCreate.confirm({
       message: 'Are you sure that you want to update?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
@@ -81,8 +80,9 @@ export class BooksCreateComponent implements OnInit{
     })
   }
 
+
   closeForm(){
-    this.confirmation.confirm({
+    this.confirmationCreate.confirm({
       message: 'Are you sure that you want cancel?',
       accept: () => {
         this.ref.close();
@@ -94,13 +94,14 @@ export class BooksCreateComponent implements OnInit{
     this.bookForm = this.fb.group({
       name:['',[Validators.required,Validators.minLength(3)]],
       authors: ['',[Validators.required,Validators.minLength(1)]],
-      pages: ['',[Validators.required,Validators.pattern(/^\d+$/)]],
+      pages: [null,[Validators.required,Validators.pattern(/^\d+$/)]],
       genres: ['',[Validators.required,Validators.minLength(1)]],
-      publicationYear: ['',[Validators.required]],
+      publicationYear: [null,[Validators.required]],
       asin:['',[Validators.required,Validators.minLength(10)]],
       summary:['',[Validators.required,Validators.minLength(15)]],
       publisher: ['',[Validators.required]],
       bookCover: ['',[Validators.required,Validators.minLength(5)]]
     })
+    this.getMultiselectInfos();
   }
 }
