@@ -1,1 +1,78 @@
-<p>authors-create works!</p>
+<form [formGroup]="authorForm" (ngSubmit)="createConfirmation()">
+  <div class="grid p-fluid mt-1">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input
+              pTooltip="Enter Author Name"
+              id="float-input-name"
+              type="text"
+              pInputText
+              formControlName="name"
+            />
+          <label for="float-input-name">Author Name</label>
+          <small class="p-error block"
+                 *ngIf="authorForm.get('name')?.invalid && authorForm.get('name')?.dirty">
+            Author Name is required</small>
+        </span>
+    </div>
+  </div>
+
+  <div class="grid p-fluid mt-2">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <p-inputMask
+              id="float-input-birth"
+              pTooltip="Enter the year of birth"
+              mask="9999/99/99"
+              formControlName="birthDate"
+            ></p-inputMask>
+            <label for="float-input-birth">Birth Date</label>
+            <small class="p-error block"
+                   *ngIf="authorForm.get('birthDate')?.invalid && authorForm.get('birthDate')?.dirty">
+            Birth Date is required</small>
+        </span>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input
+              pTooltip="Enter Author Nation"
+              id="float-input-nationality"
+              type="text"
+              pInputText
+              formControlName="nationality"
+            />
+            <label for="float-input-nationality">Nationality</label>
+            <small class="p-error block"
+                   *ngIf="authorForm.get('nationality')?.invalid && authorForm.get('nationality')?.dirty">
+            Nationality is required</small>
+        </span>
+    </div>
+  </div>
+  <div class="grid p-fluid mt-3">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label" pTooltip="Enter Author description" >
+            <textarea
+              id="float-input-description"
+              rows="5"
+              cols="30"
+              pInputTextarea
+              formControlName="description"
+            ></textarea>
+        <label for="float-input-description">Description</label>
+            <small class="p-error block"
+                   *ngIf="authorForm.get('description')?.invalid && authorForm.get('description')?.dirty">
+            Description text is required</small>
+        </span>
+    </div>
+  </div>
+  <div class="flex align-items-end justify-content-end">
+    <div class="author-button">
+      <button type="submit" mat-raised-button color="primary" [disabled]="authorForm.invalid">Create<i class="material-icons">add_circle_outline</i></button>
+    </div>
+    <div class="author-cancel">
+      <button type="button" mat-raised-button color="warn" (click)="closeForm()" >Cancel<i class="material-icons">cancel</i></button>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+</form>
+

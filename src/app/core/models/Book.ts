@@ -4,7 +4,6 @@ import {IPublisher} from "./Publisher";
 
 export interface IBook{
   id?:string
-
   name:string
   authors?:IAuthor[]
   pages?:Date

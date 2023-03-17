@@ -17,7 +17,7 @@ export class PublisherService {
 
 
   findById(id:string):Observable<IPublisher>{
-    const url = this.baseUrl + `/publisher/` + id;
+    const url = this.baseUrl + `/publisher/${id}`;
     return this.http.get<IPublisher>(url);
   }
   findAll(): Observable<IPublisher[]>{
@@ -32,8 +32,8 @@ export class PublisherService {
     const url = this.baseUrl + "/publisher";
     return this.http.put<IPublisher>(url, publisher);
   }
-  delete():Observable<any> {
-    const url = this.baseUrl + `/publisher/`;
+  delete(id:string):Observable<any> {
+    const url = this.baseUrl + `/publisher/${id}`;
     return this.http.delete(url)
   }
 

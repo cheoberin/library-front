@@ -11,6 +11,7 @@ import {ConfirmationService} from 'primeng/api';
 import {AuthorService} from "../../../shared/services/author/author.service";
 import {GenresService} from "../../../shared/services/genres/genres.service";
 import {PublisherService} from "../../../shared/services/publisher/publisher.service";
+import {catchError, forkJoin, tap, throwError} from "rxjs";
 
 
 @Component({
@@ -62,7 +63,7 @@ export class BooksUpdateComponent implements OnInit {
 
   update(): void{
     this.newBook = new Book(this.bookForm.value)
-    this.bookService.update(this.newBook).subscribe((resp) =>{
+    this.bookService.update(this.newBook).subscribe(() =>{
       this.bookService.message("Book updated successfully!","success")
     }, error =>{
       console.log(error)
@@ -86,16 +87,24 @@ export class BooksUpdateComponent implements OnInit {
 
      this.imgLinkDefault = resp.bookCover!;
    });
+    this.getMultiselectInfos()
+  }
 
-   this.authorService.findAll().subscribe((resp) =>{
-     this.authors = resp;
-   });
-   this.genreService.findAll().subscribe((resp)=>{
-     this.genres = resp;
-   });
-   this.publisherService.findAll().subscribe((resp)=>{
-     this.publishers = resp;
-   });
+  getMultiselectInfos(){
+    forkJoin([
+      this.authorService.findAll(),
+      this.genreService.findAll(),
+      this.publisherService.findAll()
+    ]).pipe(tap(([authors,genres,publishers]) =>{
+        this.authors = authors;
+        this.genres = genres;
+        this.publishers = publishers;
+      }),
+      catchError(err => {
+        console.error(err);
+        return throwError(err);
+      })
+    ).subscribe();
   }
 
   closeForm(){

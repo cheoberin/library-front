@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Observable} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -28,10 +28,12 @@ export class AuthorsReadComponent implements AfterViewInit, OnInit, OnDestroy {
   sort!: MatSort;
   ref!: DynamicDialogRef;
   constructor(private authorService: AuthorService, public dialogService: DialogService,
-              private confirmationRead: ConfirmationService) {
+              private confirmationRead: ConfirmationService,
+              private changeDetectorRefs: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+
   }
 
   openDialogCreate() {
@@ -42,6 +44,9 @@ export class AuthorsReadComponent implements AfterViewInit, OnInit, OnDestroy {
       resizable: true,
       draggable: true,
       maximizable: true
+    });
+    this.ref.onClose.subscribe((res) => {
+      this.populateTable(true);
     });
   }
 
@@ -54,11 +59,14 @@ export class AuthorsReadComponent implements AfterViewInit, OnInit, OnDestroy {
         this.delete(authorId);
       }
     })
+
   }
 
   delete(authorId: string): void {
     this.authorService.delete(authorId).subscribe((resp) => {
       this.authorService.message("Author deleted!", "success")
+      this.populateTable(true);
+
     }, error => {
       console.log(error)
       this.authorService.message("Author was not deleted!", "error");
@@ -78,16 +86,32 @@ export class AuthorsReadComponent implements AfterViewInit, OnInit, OnDestroy {
       baseZIndex: 10,
       maximizable: true
     });
-  }
-
-  ngAfterViewInit() {
-    this.findAll().subscribe((resp) => {
-      this.dataSource = new MatTableDataSource<IAuthor>(resp);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.ref.onClose.subscribe((res) => {
+      this.populateTable(true);
     });
   }
 
+  ngAfterViewInit() {
+    this.populateTable(false);
+  }
+
+  populateTable(refresh:boolean){
+    this.findAll().subscribe((resp) => {
+      if(!refresh) {
+        this.dataSource = new MatTableDataSource<IAuthor>(resp);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+      else {
+        this.findAll().subscribe((resp) => {
+          this.dataSource.data = resp;
+          this.paginator._changePageSize(this.paginator.pageSize);
+          this.dataSource.sort = this.sort;
+        });
+        this.changeDetectorRefs.detectChanges();
+      }
+    });
+  }
   findAll(): Observable<IAuthor[]> {
     return this.author$ = this.authorService.findAll();
   }

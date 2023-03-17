@@ -1,0 +1,29 @@
+<form [formGroup]="genreForm" (ngSubmit)="createConfirmation()">
+  <div class="grid p-fluid mt-1">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input
+              pTooltip="Enter Genre Name"
+              id="float-input-name"
+              type="text"
+              pInputText
+              formControlName="name"
+            />
+          <label for="float-input-name">Genre Name</label>
+          <small class="p-error block"
+                 *ngIf="genreForm.get('name')?.invalid && genreForm.get('name')?.dirty">
+            Genre Name is required</small>
+        </span>
+    </div>
+  </div>
+  <div class="flex align-items-end justify-content-end">
+    <div class="genre-button">
+      <button type="submit" mat-raised-button color="primary" [disabled]="genreForm.invalid">Create<i class="material-icons">add_circle_outline</i></button>
+    </div>
+    <div class="genre-cancel">
+      <button type="button" mat-raised-button color="warn" (click)="closeForm()" >Cancel<i class="material-icons">cancel</i></button>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+</form>
+

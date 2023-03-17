@@ -11,6 +11,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {AuthorService} from "../../../shared/services/author/author.service";
 import {GenresService} from "../../../shared/services/genres/genres.service";
 import {PublisherService} from "../../../shared/services/publisher/publisher.service";
+import {catchError, forkJoin, tap, throwError} from "rxjs";
 
 
 @Component({
@@ -20,9 +21,7 @@ import {PublisherService} from "../../../shared/services/publisher/publisher.ser
   providers:[ConfirmationService]
 })
 export class BooksCreateComponent implements OnInit{
-
   imgLinkDefault!: string;
-  imgLink!: string;
   publishers!: IPublisher[];
   authors!: IAuthor[];
   genres!: IGenre[];
@@ -36,8 +35,6 @@ export class BooksCreateComponent implements OnInit{
               private fb: FormBuilder,
               public ref: DynamicDialogRef,
               private confirmationCreate: ConfirmationService ){
-
-
 
     this.imgLinkDefault = environment.imageBase;
 
@@ -58,18 +55,23 @@ export class BooksCreateComponent implements OnInit{
   }
 
   getMultiselectInfos(){
-   this.authorService.findAll().subscribe((resp) =>{
-     this.authors = resp;
-   });
-   this.genreService.findAll().subscribe((resp) =>{
-     this.genres = resp;
-   });
-   this.publisherService.findAll().subscribe((resp)=>{
-     this.publishers = resp;
-   });
+    forkJoin([
+      this.authorService.findAll(),
+      this.genreService.findAll(),
+      this.publisherService.findAll()
+    ]).pipe(tap(([authors,genres,publishers]) =>{
+      this.authors = authors;
+      this.genres = genres;
+      this.publishers = publishers;
+      }),
+      catchError(err => {
+        console.error(err);
+        return throwError(err);
+      })
+    ).subscribe();
   }
 
-  updateConfirmation(){
+  createConfirmation(){
     this.confirmationCreate.confirm({
       message: 'Are you sure that you want to update?',
       header: 'Confirmation',

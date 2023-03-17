@@ -42,7 +42,6 @@ import {MessageService} from "primeng/api";
     BooksUpdateComponent
   ],
     imports: [
-        CommonModule,
         MatTableModule,
         AppRoutingModule,
         MatPaginatorModule,

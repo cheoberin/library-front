@@ -1,14 +1,15 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { BooksCreateComponent } from '../books-create/books-create.component';
 import { Observable } from 'rxjs';
-import {Book, IBook} from 'src/app/core/models/book';
+import {IBook} from 'src/app/core/models/book';
 import { BookService } from 'src/app/shared/services/book/book.service';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {BooksUpdateComponent} from "../books-update/books-update.component";
-import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmationService} from "primeng/api";
+
 
 @Component({
   selector: 'app-books-read',
@@ -16,11 +17,8 @@ import {ConfirmationService, MessageService} from "primeng/api";
   styleUrls: ['./books-read.component.scss'],
   providers:[DialogService,ConfirmationService]
 })
-
-
 export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
   books$!: Observable<IBook[]>;
-
   displayedColumns: string[] = ['name', 'asin', 'publicationYear','action'];
   dataSource = new MatTableDataSource<IBook>();
 
@@ -28,11 +26,11 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
   paginator!: MatPaginator;
   @ViewChild(MatSort)
   sort!: MatSort;
-
   ref!: DynamicDialogRef;
 
     constructor(private service : BookService , public  dialogService: DialogService,
-                private confirmationRead: ConfirmationService) {}
+                private confirmationRead: ConfirmationService,
+                private changeDetectorRefs: ChangeDetectorRef) {}
 
     ngOnInit(): void {}
 
@@ -44,6 +42,9 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
         resizable : true,
         draggable : true,
         maximizable: true
+      });
+      this.ref.onClose.subscribe((res) => {
+        this.populateTable(true);
       });
     }
 
@@ -60,6 +61,7 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
   delete(bookId:string): void{
     this.service.delete(bookId).subscribe((resp) =>{
       this.service.message("Book deleted!","success")
+      this.populateTable(true);
     }, error =>{
       console.log(error)
       this.service.message("Book was not deleted!","error");
@@ -79,21 +81,36 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
         baseZIndex : 10,
         maximizable: true
       });
+      this.ref.onClose.subscribe((res) => {
+        this.populateTable(true);
+      });
     }
 
-
     ngAfterViewInit() {
-        this.findAll().subscribe((resp) => {
+      this.populateTable(false);
+    }
+
+  populateTable(refresh:boolean){
+    this.findAll().subscribe((resp) => {
+      if(!refresh) {
         this.dataSource = new MatTableDataSource<IBook>(resp);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      });
-    }
+      }
+      else {
+        this.findAll().subscribe((resp) => {
+          this.dataSource.data = resp;
+          this.paginator._changePageSize(this.paginator.pageSize);
+          this.dataSource.sort = this.sort;
+        });
+        this.changeDetectorRefs.detectChanges();
+      }
+    });
+  }
 
     findAll():Observable<IBook[]>{
       return this.books$ = this.service.findAll();
     }
-
 
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;

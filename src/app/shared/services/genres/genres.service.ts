@@ -17,7 +17,7 @@ export class GenresService {
 
 
   findById(id:string):Observable<IGenre>{
-    const url = this.baseUrl + `/genre/` + id;
+    const url = this.baseUrl + `/genre/${id}`;
     return this.http.get<IGenre>(url);
   }
   findAll(): Observable<IGenre[]>{
@@ -32,8 +32,8 @@ export class GenresService {
     const url = this.baseUrl + "/genre";
     return this.http.put<IGenre>(url, genre);
   }
-  delete():Observable<any> {
-    const url = this.baseUrl + `/genre/`;
+  delete(id:string):Observable<any> {
+    const url = this.baseUrl + `/genre/${id}`;
     return this.http.delete(url)
   }
 
