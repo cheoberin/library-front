@@ -5,6 +5,7 @@ import { HomeComponent } from './features/home/home.component';
 import {AuthorsReadComponent} from "./features/authors/authors-read/authors-read.component";
 import {GenresReadComponent} from "./features/genres/genres-read/genres-read.component";
 import {PublisherReadComponent} from "./features/publisher/publisher-read/publisher-read.component";
+import {UsersReadComponent} from "./features/users/users-read/users-read.component";
 
 const routes: Routes = [
   {
@@ -22,12 +23,15 @@ const routes: Routes = [
   component:GenresReadComponent
   },
   {path:'publishers',
-  component:PublisherReadComponent}
+  component:PublisherReadComponent
+  },
+  {path:'users',
+  component:UsersReadComponent}
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: `reload`})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

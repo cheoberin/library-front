@@ -1,13 +1,13 @@
 {
   "name": "library-front",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "pwa": "http-server ./dist"
+    "startprd": "angular-http-server --path dist/library-front -p 4200 --silent "
   },
   "private": true,
   "dependencies": {

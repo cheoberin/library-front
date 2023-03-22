@@ -1,0 +1,41 @@
+.component-title {
+  width: 50%;
+  height: 3rem;
+  margin-right: auto;
+  margin-left: auto;
+  h1{
+    text-align: center;
+  }
+}
+
+.users-create{
+  padding: 8px;
+  button{
+    color: whitesmoke;
+    background-color: #44b944;
+    font-weight: bolder;
+    width: 100px;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+}
+
+.table-container{
+  width: 80%;
+  margin: 40px auto;
+}
+
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}

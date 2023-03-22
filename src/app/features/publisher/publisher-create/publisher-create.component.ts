@@ -22,22 +22,22 @@ export class PublisherCreateComponent implements OnInit{
 
   create(){
     if(this.publisherForm.invalid){
-      this.publisherService.message("Genre was not created!","error");
+      this.publisherService.message("Publisher was not created!","error");
       return;
     }
-    this.newPublisher = new Genre(this.publisherForm.value)
+    this.newPublisher = new Publisher(this.publisherForm.value)
     this.publisherService.create(this.newPublisher).subscribe(() =>{
-      this.publisherService.message("Genre created successfully!","success")
+      this.publisherService.message("Publisher created successfully!","success")
 
     }, error => {
       console.log(error)
-      this.publisherService.message("Genre was not created!","error")
+      this.publisherService.message("Publisher was not created!","error")
     })
   }
 
   createConfirmation(){
     this.confirmationCreate.confirm({
-      message: 'Are you sure that you want to update?',
+      message: 'Are you sure that you want to create?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

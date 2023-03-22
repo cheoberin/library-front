@@ -86,6 +86,7 @@ export class BooksUpdateComponent implements OnInit {
             bookCover: this.imgLinkDefault})
 
      this.imgLinkDefault = resp.bookCover!;
+     console.log(resp.genres,this.bookForm)
    });
     this.getMultiselectInfos()
   }

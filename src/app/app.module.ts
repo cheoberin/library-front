@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { FeaturesModule } from './features/features.module';
-
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { FeaturesModule } from './features/features.module';
     CoreModule,
     FeaturesModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

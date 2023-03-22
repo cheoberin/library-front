@@ -5,6 +5,7 @@ import { BooksModule } from './books/books.module';
 import {AuthorsModule} from "./authors/authors.module";
 import {GenresModule} from "./genres/genres.module";
 import {PublisherModule} from "./publisher/publisher.module";
+import {UsersModule} from "./users/users.module";
 
 
 
@@ -16,7 +17,8 @@ import {PublisherModule} from "./publisher/publisher.module";
     BooksModule,
     AuthorsModule,
     GenresModule,
-    PublisherModule
+    PublisherModule,
+    UsersModule
   ],
   exports:[]
 })

@@ -1,1 +1,70 @@
-<p>users-update works!</p>
+<form [formGroup]="usersForm" (ngSubmit)="updateConfirmation()">
+  <div class="grid p-fluid mt-1">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input
+              pTooltip="Enter user Name"
+              id="float-input-name"
+              type="text"
+              pInputText
+              formControlName="name"
+            />
+          <label for="float-input-name">Name</label>
+          <small class="p-error block"
+                 *ngIf="usersForm.get('name')?.invalid && usersForm.get('name')?.dirty">
+            Name is required</small>
+        </span>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <input
+              pTooltip="Enter user Email"
+              id="float-input-username"
+              type="text"
+              pInputText
+              formControlName="username"
+            />
+            <label for="float-input-username">Email</label>
+            <small class="p-error block"
+                   *ngIf="usersForm.get('username')?.invalid && usersForm.get('username')?.dirty">
+            User Email is required</small>
+        </span>
+    </div>
+  </div>
+  <div class="grid p-fluid mt-2 mb-2">
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <p-password
+              formControlName="password"
+              [toggleMask]="true"
+              id="float-input-password"
+            ></p-password>
+          <label for="float-input-password">Password</label>
+          <small class="p-error block"
+                 *ngIf="usersForm.get('password')?.invalid && usersForm.get('password')?.dirty">
+            Password is required</small>
+        </span>
+    </div>
+    <div class="col-12 md:col-4">
+      <p-multiSelect
+        [options]="roles"
+        formControlName="roles"
+        placeholder="Select Role"
+        optionLabel="name"
+      ></p-multiSelect>
+      <small class="p-error block"
+             *ngIf="usersForm.get('roles')?.invalid && usersForm.get('roles')?.dirty">
+        At least one Role is required</small>
+    </div>
+  </div>
+  <div class="flex align-items-end justify-content-end pt-7 mt-7">
+    <div class="users-button">
+      <button type="submit" mat-raised-button color="primary" [disabled]="usersForm.invalid">Update<i class="material-icons">update</i></button>
+    </div>
+    <div class="users-cancel">
+      <button type="button" mat-raised-button color="warn" (click)="closeForm()" >Cancel<i class="material-icons">cancel</i></button>
+    </div>
+  </div>
+  <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+</form>
+
