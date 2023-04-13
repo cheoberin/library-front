@@ -8,6 +8,7 @@ import { FeaturesModule } from './features/features.module';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/services/auth/authconfig.interceptor";
+import {JwtService} from "./shared/services/jwt/jwt.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AuthInterceptor} from "./shared/services/auth/authconfig.interceptor";
   ],
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy},
-    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    JwtService
   ],
   bootstrap: [AppComponent]
 })

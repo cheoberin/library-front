@@ -1,0 +1,32 @@
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="max-w-screen px-4 md:px-8">
+    <div class="grid gap-5 flex-nowrap">
+
+      <div class="h-20rem overflow-hidden border-round-lg bg-gray-100 shadow-6">
+        <img src="https://images.unsplash.com/photo-1500589177368-c810ea3db799?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80" loading="lazy" alt="No permission photo" class="h-full w-full object-cover object-center" />
+      </div>
+
+      <div class="flex flex-column align-items-center justify-content-center">
+        <p class="mb-3 text-sm font-semibold uppercase text-indigo-500 ">Não Autorizado</p>
+        <h1 class="mb-1 text-center text-2xl font-bold text-gray-800 ">Você não possui acesso a esta aplicação</h1>
+        <p class="mb-3 text-center text-gray-500 sm:text-left  md:text-lg">Se você acha que isso é um erro por favor entre em contato com o suporte em um dos links abaixo: </p>
+
+        <nav class="flex gap-3 ">
+          <div>
+            <a href="#" class="inline-block text-sm text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 md:text-base">suporte@libraryjwba.com</a>
+          </div>
+          <div>
+            <a href="#" class="inline-block text-sm text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 md:text-base">+55999999999</a>
+          </div>
+          <div>
+            <a href="#" class="inline-block text-sm text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 md:text-base">0800 999 9000</a>
+          </div>
+        </nav>
+
+      </div>
+      <p-button (click)="logout()" label="Logout" icon="pi pi-sign-out" styleClass="p-button-danger" ></p-button>
+    </div>
+
+  </div>
+
+</div>

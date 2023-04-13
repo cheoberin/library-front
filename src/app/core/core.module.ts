@@ -18,9 +18,10 @@ import {MatButtonModule} from "@angular/material/button";
 import { LoginComponent } from './components/login/login.component';
 import {CheckboxModule} from "primeng/checkbox";
 import {RippleModule} from "primeng/ripple";
-import {InputText, InputTextModule} from "primeng/inputtext";
+import {InputTextModule} from "primeng/inputtext";
 import {MenuModule} from "primeng/menu";
 import {AvatarModule} from "primeng/avatar";
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {AvatarModule} from "primeng/avatar";
     SidenavComponent,
     FooterComponent,
     LoginComponent,
+    UnauthorizedComponent,
 
   ],
   imports: [
@@ -53,7 +55,9 @@ import {AvatarModule} from "primeng/avatar";
   exports:[
     HeaderComponent,
     SidenavComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    UnauthorizedComponent,
   ],
   providers:[
     SideNavService,

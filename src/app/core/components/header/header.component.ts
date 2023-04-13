@@ -21,11 +21,10 @@ export class HeaderComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
-    this.currentUserService.currentUser$.subscribe(user => {
-      if (user) {
-        this.initials = user.name.substring(0, 2).toUpperCase();
-      }
+    this.currentUserService.getInitials().subscribe(initials => {
+      this.initials = initials;
     });
     this.items = [
       {

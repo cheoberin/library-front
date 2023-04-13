@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedIn; else notlogged">
+<div *ngIf="this.authService.isLoggedIn && this.authService.isPermited ; else notlogged">
   <app-header></app-header>
   <app-sidenav></app-sidenav>
 </div>

@@ -8,9 +8,9 @@ import {PublisherReadComponent} from "./features/publisher/publisher-read/publis
 import {UsersReadComponent} from "./features/users/users-read/users-read.component";
 import {AuthGuard} from "./shared/services/guard/auth.guard";
 import {LoginComponent} from "./core/components/login/login.component";
+import {UnauthorizedComponent} from "./core/components/unauthorized/unauthorized.component";
 
 const routes: Routes = [
-
   {
     path: '',
     component: HomeComponent,
@@ -45,7 +45,12 @@ const routes: Routes = [
     path:'login',
     component:LoginComponent,
     pathMatch:'full'
+  },
+  {
+    path:'unauthorized',
+    component:UnauthorizedComponent,
   }
+
 ];
 
 @NgModule({

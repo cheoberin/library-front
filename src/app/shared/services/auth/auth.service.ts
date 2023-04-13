@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import {SingInRequest} from "../../../core/models/User";
 import {environment} from "../../../../environments/environment";
 import {CurrentUserService} from "./CurrentUser.service";
+import {JwtService} from "../jwt/jwt.service";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +20,7 @@ export class AuthService {
   endpoint: string = environment.baseUrl;
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  responseCode?:number;
-  constructor(private http: HttpClient, public router: Router,private currentUserService :CurrentUserService) {}
+  constructor(private http: HttpClient, public router: Router,private currentUserService:CurrentUserService ,private jwtService:JwtService) {}
 
   signIn(singInRequest : SingInRequest) {
     return this.http.post<any>(`${this.endpoint}/auth/login`, singInRequest)
@@ -46,6 +46,14 @@ export class AuthService {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null;
   }
+  get isPermited():boolean{
+    let rawToken = localStorage.getItem('access_token');
+    if(rawToken) {
+      let decodedToken = this.jwtService.DecodeToken(rawToken);
+      return decodedToken.roles.includes('ADMIN') || decodedToken.roles.includes('EMPLOYEE')
+    }
+    return false;
+  }
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');
     let removeUser = localStorage.removeItem('current_user');
@@ -54,8 +62,8 @@ export class AuthService {
     }
   }
   // User profile
-  getUserProfile(username: string): Observable<any> {
-    let api = `${this.endpoint}/user/getUser/${username}`;
+  getUserProfile(id: string): Observable<any> {
+    let api = `${this.endpoint}/user/getUser/${id}`;
     return this.http.get(api);
   }
 
