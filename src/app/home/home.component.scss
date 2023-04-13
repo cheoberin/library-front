@@ -1,0 +1,31 @@
+
+:host ::ng-deep .dark-panel {
+    width: 80%;
+    height: 40%;
+    margin: 1rem auto 2rem auto;
+
+    background-color: #efefef;
+
+    .p-card-header{
+      color: #020202;
+      font-style: normal;
+      font-weight: bold;
+      font-size: xxx-large;
+      padding-top: 1rem;
+    }
+    .p-card-content{
+        color: #495057;
+        font-size: larger;
+        font-style: oblique;
+        font-weight: 400;
+    }
+
+    .p-card-header,.p-card-content, img{
+        padding-left: 14rem;
+    }
+
+
+    img{
+        margin: auto;
+    }
+}

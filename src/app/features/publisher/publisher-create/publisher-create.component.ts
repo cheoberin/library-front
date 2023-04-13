@@ -57,7 +57,8 @@ export class PublisherCreateComponent implements OnInit{
 
   ngOnInit(): void {
     this.publisherForm = this.fb.group({
-      name:['',[Validators.required,Validators.minLength(3)]]
+      name:['',[Validators.required,Validators.minLength(3)]],
+      description:['',[Validators.required]]
     })
   }
 

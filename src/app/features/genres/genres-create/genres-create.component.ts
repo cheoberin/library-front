@@ -55,7 +55,8 @@ export class GenresCreateComponent implements OnInit{
 
   ngOnInit(): void {
     this.genreForm = this.fb.group({
-      name:['',[Validators.required,Validators.minLength(3)]]
+      name:['',[Validators.required,Validators.minLength(3)]],
+      description:['',[Validators.required]]
     })
   }
 

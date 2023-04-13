@@ -102,7 +102,8 @@ export class BooksCreateComponent implements OnInit{
       asin:['',[Validators.required,Validators.minLength(10)]],
       summary:['',[Validators.required,Validators.minLength(15)]],
       publisher: ['',[Validators.required]],
-      bookCover: ['',[Validators.required,Validators.minLength(5)]]
+      bookCover: ['',[Validators.required,Validators.minLength(5)]],
+      price:[null,[Validators.required]]
     })
     this.getMultiselectInfos();
   }

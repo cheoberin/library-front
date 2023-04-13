@@ -22,12 +22,11 @@ export class AuthorsUpdateComponent implements OnInit {
               private confirmationUpdate: ConfirmationService) {
 
     this.authorForm = this.fb.group({
-      id:[this.config.data.id],
+      _id:[this.config.data.id],
       name:['',[Validators.required,Validators.minLength(3)]],
       nationality:['',[Validators.required,Validators.minLength(3)]],
       description:['',[Validators.required,Validators.minLength(10)]],
       birthDate:[null,[Validators.required]],
-      registerDate:['']
     })
 
   }
@@ -35,12 +34,11 @@ export class AuthorsUpdateComponent implements OnInit {
   getAuthorInfo(id:string){
     this.authorService.findById(id).subscribe((resp)=>{
       this.authorForm.setValue({
-        id:resp.id,
+        _id:resp._id,
         name:resp.name,
         nationality:resp.nationality,
         description:resp.description,
         birthDate:resp.birthDate,
-        registerDate:resp.registerDate
       })
     })
   }

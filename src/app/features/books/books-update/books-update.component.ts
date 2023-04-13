@@ -37,7 +37,7 @@ export class BooksUpdateComponent implements OnInit {
              private confirmationUpdate: ConfirmationService){
 
    this.bookForm = this.fb.group({
-     id:[this.config.data.id],
+     _id:[this.config.data.id],
      name:['',[Validators.required,Validators.minLength(3)]],
      authors: ['',[Validators.required,Validators.minLength(1)]],
      pages: ['',[Validators.required,Validators.pattern(/^\d+$/)]],
@@ -46,7 +46,8 @@ export class BooksUpdateComponent implements OnInit {
      asin:['',[Validators.required,Validators.minLength(10)]],
      summary:['',[Validators.required,Validators.minLength(15)]],
      publisher: ['',[Validators.required]],
-     bookCover: [this.imgLinkDefault ,[Validators.required,Validators.minLength(5)]]
+     bookCover: [this.imgLinkDefault ,[Validators.required,Validators.minLength(5)]],
+     price: ['',[Validators.required]],
    })
  }
 
@@ -74,7 +75,7 @@ export class BooksUpdateComponent implements OnInit {
   getBookInfos(id:string){
    this.bookService.findById(id).subscribe((resp)=>{
      this.bookForm.setValue({
-            id:resp.id,
+            _id:resp._id,
             name:resp.name,
             authors: resp.authors,
             pages: resp.pages,
@@ -82,11 +83,11 @@ export class BooksUpdateComponent implements OnInit {
             publicationYear: resp.publicationYear,
             asin:resp.asin,
             summary:resp.summary,
-            publisher: resp.publisher,
-            bookCover: this.imgLinkDefault})
-
+            publisher: resp.publisherResponse,
+            bookCover: this.imgLinkDefault,
+            price:resp.price
+     })
      this.imgLinkDefault = resp.bookCover!;
-     console.log(resp.genres,this.bookForm)
    });
     this.getMultiselectInfos()
   }

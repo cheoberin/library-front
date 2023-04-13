@@ -3,4 +3,9 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span>LIBRARY</span>
+
+  <p-button styleClass="p-button-text" (click)="menu.toggle($event)" >
+    <p-avatar label="{{initials}}" styleClass="mr-2" shape="circle"></p-avatar>
+  </p-button>
 </mat-toolbar>
+<p-menu #menu [model]="items" [popup]="true"></p-menu>

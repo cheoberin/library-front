@@ -15,14 +15,14 @@
         <td mat-cell *matCellDef="let row"> {{row.name}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="asin">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ASIN </th>
-        <td mat-cell *matCellDef="let row"> {{row.asin}} </td>
+      <ng-container matColumnDef="authors">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+        <td mat-cell *matCellDef="let row"> {{row.authors[0].name}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="publicationYear">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Publication Year </th>
-        <td mat-cell *matCellDef="let row"> {{row.publicationYear}} </td>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let row"> {{row.price}} </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
@@ -57,28 +57,23 @@
   <table mat-table [dataSource]="[{},{},{},{},{}]" matSort>
 
     <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
       <td mat-cell *matCellDef="let element"> <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton> </td>
     </ng-container>
 
     <!-- Progress Column -->
-    <ng-container matColumnDef="asin">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ASIN </th>
+    <ng-container matColumnDef="authors">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Authors</th>
       <td mat-cell *matCellDef="let element"> <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton> </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton></td>
-    </ng-container>
-
-    <!-- Fruit Column -->
-    <ng-container matColumnDef="publicationYear">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Publication Year </th>
+    <!-- Progress Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
       <td mat-cell *matCellDef="let element"> <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton> </td>
     </ng-container>
+
 
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>

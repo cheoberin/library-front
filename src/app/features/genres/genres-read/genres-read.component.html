@@ -18,10 +18,10 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
         <td mat-cell *matCellDef="let element" class="td-actions">
-          <button mat-icon-button color="primary" (click)="openDialogUpdate(element.id)">
+          <button mat-icon-button color="primary" (click)="openDialogUpdate(element._id)">
             <i class="material-icons">edit</i>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteConfirmation($event, element.id)">
+          <button mat-icon-button color="warn" (click)="deleteConfirmation($event, element._id)">
             <i class="material-icons">delete</i>
           </button>
         </td>

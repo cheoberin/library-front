@@ -1,5 +1,5 @@
 <form [formGroup]="bookForm" (ngSubmit)="updateConfirmation()">
-  <div class="grid p-fluid mt-1">
+  <div class="grid p-fluid justify-content-between mt-1">
     <div class="col-12 md:col-4">
         <span class="p-float-label">
             <input
@@ -9,9 +9,25 @@
               pInputText
               formControlName="name"
             />
-          <label for="float-input-pages">Book Name</label>
+          <label for="float-input-name">Book Name</label>
           <small class="p-error block"
                  *ngIf="bookForm.get('name')?.invalid && bookForm.get('name')?.dirty">
+            Book Name is required</small>
+        </span>
+    </div>
+    <div class="col-12 md:col-4">
+        <span class="p-float-label">
+            <p-inputNumber
+              pTooltip="Enter book Price"
+              id="float-input-price"
+              mode="currency"
+              formControlName="price"
+              currency="BRL"
+              locale="pt-BR"
+            />
+          <label for="float-input-price">Book Price</label>
+          <small class="p-error block"
+                 *ngIf="bookForm.get('price')?.invalid && bookForm.get('price')?.dirty">
             Book Name is required</small>
         </span>
     </div>

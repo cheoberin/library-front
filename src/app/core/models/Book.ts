@@ -3,7 +3,7 @@ import {IGenre} from "./Genre";
 import {IPublisher} from "./Publisher";
 
 export interface IBook{
-  id?:string
+  _id?:string
   name:string
   authors?:IAuthor[]
   pages?:Date
@@ -12,12 +12,14 @@ export interface IBook{
   asin?:string
   summary?:string
   publisher?:IPublisher
+  publisherResponse?:IPublisher
   bookCover?:string
+  price?:number
 }
 
 
 export class Book {
-  id?:string
+  _id?:string
   name?:string
   authors?:IAuthor[]
   pages?:number
@@ -26,7 +28,9 @@ export class Book {
   asin?:string
   summary?:string
   publisher?:IPublisher
+  publisherResponse?:IPublisher
   bookCover?:string
+  price?:number
 
   public constructor(init?: Partial<Book>) {
     Object.assign(this, init);

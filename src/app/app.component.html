@@ -1,4 +1,10 @@
-<app-header/>
-<app-sidenav/>
+<div *ngIf="isLoggedIn; else notlogged">
+  <app-header></app-header>
+  <app-sidenav></app-sidenav>
+</div>
 
-
+<ng-template #notlogged>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

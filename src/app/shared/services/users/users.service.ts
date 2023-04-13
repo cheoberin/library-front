@@ -15,10 +15,7 @@ export class UsersService {
   constructor(private http: HttpClient,
               private messageServ: MessageService) { }
 
-  findByUsername(username:string):Observable<IUsers>{
-    const url = this.baseUrl + `/user/getUser/${username}`;
-    return this.http.get<IUsers>(url);
-  }
+
   findAllUsers(): Observable<IUsers[]>{
     const url = this.baseUrl + "/user/list";
     return this.http.get<IUsers[]>(url);
@@ -39,16 +36,16 @@ export class UsersService {
   }
 
   addRoletoUser(formRoletoUser:Object):Observable<IUsers>{
-    const url = this.baseUrl + "user/role/addtouser";
+    const url = this.baseUrl + "/role/addtouser";
     return this.http.post<IUsers>(url,formRoletoUser);
   }
   createRole(role: IRoles): Observable<IRoles>{
-    const url = this.baseUrl + "/user/role/save";
+    const url = this.baseUrl + "/role/save";
     return this.http.post<IRoles>(url, role);
   }
 
   findAllRoles(): Observable<IRoles[]>{
-    const url = this.baseUrl + "/user/role/listRoles";
+    const url = this.baseUrl + "/role/listRoles";
     return this.http.get<IRoles[]>(url);
   }
   deleteUser(userName:string):Observable<any> {
@@ -56,7 +53,7 @@ export class UsersService {
     return this.http.delete(url)
   }
   deleteRole(roleName:string):Observable<any> {
-    const url = this.baseUrl + `user/role/delete/${roleName}`;
+    const url = this.baseUrl + `/role/delete/${roleName}`;
     return this.http.delete(url)
   }
 

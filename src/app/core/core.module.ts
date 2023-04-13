@@ -15,12 +15,21 @@ import { SideNavService } from '../shared/services/side-nav/side-nav.service';
 import { FeaturesModule } from '../features/features.module';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
+import { LoginComponent } from './components/login/login.component';
+import {CheckboxModule} from "primeng/checkbox";
+import {RippleModule} from "primeng/ripple";
+import {InputText, InputTextModule} from "primeng/inputtext";
+import {MenuModule} from "primeng/menu";
+import {AvatarModule} from "primeng/avatar";
+
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidenavComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+
   ],
   imports: [
     CommonModule,
@@ -34,7 +43,12 @@ import {MatButtonModule} from "@angular/material/button";
     AppRoutingModule,
     FeaturesModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    CheckboxModule,
+    RippleModule,
+    InputTextModule,
+    MenuModule,
+    AvatarModule
   ],
   exports:[
     HeaderComponent,

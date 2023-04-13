@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { FeaturesModule } from './features/features.module';
 import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/services/auth/authconfig.interceptor";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,13 @@ import { PathLocationStrategy, LocationStrategy } from '@angular/common';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    FeaturesModule
+    FeaturesModule,
+    HttpClientModule
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [
+    {provide: LocationStrategy, useClass: PathLocationStrategy},
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

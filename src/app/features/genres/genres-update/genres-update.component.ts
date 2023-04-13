@@ -20,8 +20,10 @@ export class GenresUpdateComponent implements OnInit{
                public ref: DynamicDialogRef, private confirmationCreate: ConfirmationService) {
 
     this.genreForm = this.fb.group({
-      id:[this.config.data.id],
-      name:['',[Validators.required,Validators.minLength(3)]]
+      _id:[this.config.data.id],
+      name:['',[Validators.required,Validators.minLength(3)]],
+      description:['',[Validators.required]]
+
     })
 
 
@@ -45,8 +47,9 @@ export class GenresUpdateComponent implements OnInit{
   getGenreInfo(id:string){
     this.genreService.findById(id).subscribe((resp)=>{
       this.genreForm.setValue({
-        id:resp.id,
+        _id:resp._id,
         name:resp.name,
+        description:resp.description
       })
     })
   }

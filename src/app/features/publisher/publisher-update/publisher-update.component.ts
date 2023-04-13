@@ -25,9 +25,9 @@ export class PublisherUpdateComponent implements OnInit{
 
     this.publisherForm = this.fb.group({
       id:[this.config.data.id],
-      name:['',[Validators.required,Validators.minLength(3)]]
+      name:['',[Validators.required,Validators.minLength(3)]],
+      description:['',[Validators.required]]
     })
-
 
   }
 
@@ -49,8 +49,9 @@ export class PublisherUpdateComponent implements OnInit{
   getGenreInfo(id:string){
     this.publisherService.findById(id).subscribe((resp)=>{
       this.publisherForm.setValue({
-        id:resp.id,
+        _id:resp._id,
         name:resp.name,
+        description:resp.description
       })
     })
   }

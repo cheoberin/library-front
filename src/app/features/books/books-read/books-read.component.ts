@@ -19,7 +19,7 @@ import {ConfirmationService} from "primeng/api";
 })
 export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
   books$!: Observable<IBook[]>;
-  displayedColumns: string[] = ['name', 'asin', 'publicationYear','action'];
+  displayedColumns: string[] = ['name','authors','price','action'];
   dataSource = new MatTableDataSource<IBook>();
 
   @ViewChild(MatPaginator)
@@ -69,6 +69,7 @@ export class BooksReadComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
     openDialogUpdate(bookId:string){
+      console.log(bookId)
       this.ref = this.dialogService.open(BooksUpdateComponent, {
         data:{
           id: bookId

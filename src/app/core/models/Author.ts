@@ -1,20 +1,19 @@
 export interface IAuthor{
-  id:string
+  _id:string
   name:string
   birthDate?:unknown;
   description: string;
   nationality?:string;
-  registerDate?:unknown;
 
 }
 
 export class Author {
-  id!: string;
+  _id!: string;
   name!: string;
   nationality!: string;
   description!: string;
   birthDate!: unknown;
-  registerDate?: unknown;
+
 
   public constructor(init?: Partial<Author>) {
     Object.assign(this, init);

@@ -1,11 +1,13 @@
 export interface IGenre {
-  id:string
+  _id:string
   name:string
+  description?:string
 }
 
 export class Genre{
-  id!:string
+  _id!:string
   name!:string
+  description?:string
   public constructor(init?: Partial<Genre>) {
     Object.assign(this, init);
   }
