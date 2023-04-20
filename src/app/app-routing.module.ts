@@ -9,6 +9,7 @@ import {UsersReadComponent} from "./features/users/users-read/users-read.compone
 import {AuthGuard} from "./shared/services/guard/auth.guard";
 import {LoginComponent} from "./core/components/login/login.component";
 import {UnauthorizedComponent} from "./core/components/unauthorized/unauthorized.component";
+import {RoleGuard} from "./shared/services/guard/role.guard";
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
   {
     path:'users',
     component:UsersReadComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard,RoleGuard]
   },
   {
     path:'login',

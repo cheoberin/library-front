@@ -19,7 +19,7 @@ export class BookService {
     return this.http.get<IBook>(url);
   }
   findAll(): Observable<IBook[]>{
-    const url = this.baseUrl + "/book";
+    const url = this.baseUrl + "/book/findall";
     return this.http.get<IBook[]>(url);
   }
   create(book: Book): Observable<Book>{

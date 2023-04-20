@@ -5,12 +5,12 @@
         <img src="assets/img/logo-enterprise.svg" alt="Image" height="50" class="mb-3">
         <div class="text-900 text-3xl font-medium mb-3">Bem vindo</div>
         <span class="text-600 font-medium line-height-3">Procurando o a versão do cliente?</span>
-        <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Clique Aqui!</a>
+        <a href="http://localhost:4300/" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Clique Aqui!</a>
       </div>
       <div>
         <label for="email" class="block text-900 font-medium mb-2">Email</label>
         <small class="p-error block"
-               *ngIf="signInForm.get('username')?.invalid && signInForm.get('username')?.dirty">
+               *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.dirty">
           Formato de email incorreto
         </small>
         <input id="email"
@@ -19,7 +19,7 @@
                pInputText
                class="w-full
                mb-3"
-               formControlName="username"
+               formControlName="email"
         >
         <label for="password" class="block text-900 font-medium mb-2">Password</label>
         <input id="password"

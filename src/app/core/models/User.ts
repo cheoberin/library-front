@@ -1,6 +1,6 @@
 
 export interface SingInRequest{
-  username: string;
+  email: string;
   password: string;
 
 }

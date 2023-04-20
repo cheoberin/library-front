@@ -38,7 +38,7 @@ export class AuthorsReadComponent implements AfterViewInit, OnInit, OnDestroy {
 
   openDialogCreate() {
     this.ref = this.dialogService.open(AuthorsCreateComponent, {
-      header: 'Create a new book',
+      header: 'Create a new Author',
       width: '70%',
       height: 'auto',
       resizable: true,

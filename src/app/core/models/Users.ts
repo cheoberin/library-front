@@ -3,7 +3,7 @@ import {IRoles} from "./Roles";
 export interface IUsers{
   _id:string
   name:string
-  username:string
+  email:string
   password?:string
   roles:IRoles[]
 }
@@ -11,7 +11,7 @@ export interface IUsers{
 export class Users{
   _id!:string
   name!:string
-  username!:string
+  email!:string
   password!:string
   roles!:IRoles[]
   public constructor(init?: Partial<Users>) {

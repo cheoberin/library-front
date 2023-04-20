@@ -27,7 +27,7 @@ export class AuthService {
       .pipe(
         switchMap((loginRes) => {
           localStorage.setItem('access_token', loginRes.token); // Salva o token no localStorage
-          return this.http.get(`${this.endpoint}/user/getUser/${singInRequest.username}`);
+          return this.http.get(`${this.endpoint}/user/getUser/${singInRequest.email}`);
         })
       )
       .subscribe((userRes) => {
@@ -51,6 +51,15 @@ export class AuthService {
     if(rawToken) {
       let decodedToken = this.jwtService.DecodeToken(rawToken);
       return decodedToken.roles.includes('ADMIN') || decodedToken.roles.includes('EMPLOYEE')
+    }
+    return false;
+  }
+
+  get isAdmin():boolean{
+    let rawToken = localStorage.getItem('access_token');
+    if(rawToken) {
+      let decodedToken = this.jwtService.DecodeToken(rawToken);
+      return decodedToken.roles.includes('ADMIN')
     }
     return false;
   }

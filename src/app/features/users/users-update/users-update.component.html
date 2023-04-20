@@ -22,11 +22,11 @@
               id="float-input-username"
               type="text"
               pInputText
-              formControlName="username"
+              formControlName="email"
             />
             <label for="float-input-username">Email</label>
             <small class="p-error block"
-                   *ngIf="usersForm.get('username')?.invalid && usersForm.get('username')?.dirty">
+                   *ngIf="usersForm.get('email')?.invalid && usersForm.get('email')?.dirty">
             User Email is required</small>
         </span>
     </div>

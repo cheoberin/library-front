@@ -24,7 +24,7 @@ export class UsersUpdateComponent implements OnInit{
     this.usersForm = this.fb.group({
       _id:[this.config.data.id],
       name:['',[Validators.required,Validators.minLength(4)]],
-      username:['',[Validators.required,Validators.email]],
+      email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.minLength(6)]],
       roles:['',[Validators.required]]
     });
@@ -50,7 +50,7 @@ export class UsersUpdateComponent implements OnInit{
       this.usersForm.setValue({
         _id:resp._id,
         name:resp.name,
-        username:resp.username,
+        email:resp.email,
         password:resp.password,
         roles:resp.roles
       })

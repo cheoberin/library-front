@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit{
 
   constructor(public fb:FormBuilder, public authService:AuthService, public router:Router) {
     this.signInForm = this.fb.group({
-      username: ['',[Validators.required,Validators.email]],
+      email: ['',[Validators.required,Validators.email]],
       password: ['',[Validators.required]],
     });
   }

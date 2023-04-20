@@ -16,7 +16,7 @@
       <a mat-list-item routerLink="/publishers" routerLinkActive="active-link">
         <p><i class="material-icons">business_center</i>Publishers</p>
       </a>
-      <a mat-list-item routerLink="/users" routerLinkActive="active-link">
+      <a *ngIf="this.authService.isAdmin" mat-list-item routerLink="/users" routerLinkActive="active-link">
         <p><i class="material-icons" >manage_accounts</i>Users</p>
       </a>
     </mat-nav-list>
